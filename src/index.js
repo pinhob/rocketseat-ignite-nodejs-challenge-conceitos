@@ -72,7 +72,22 @@ app.post('/todos', checksExistsUserAccount, (request, response) => {
 });
 
 app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { title, deadline } = request.body;
+  const { user } = request;
+
+  const { id } = request.params;
+
+  const checkIfTodoExists = user.todos.some((todo) => todo.id === id);
+
+  const todoIndex = user.todos.findIndex((todo) => todo.id === id);
+
+  if (!checkIfTodoExists) {
+    return response.status(404).json({ error: 'Mensagem do erro' });
+  }
+
+  user.todos[todoIndex] = { ...user.todos[todoIndex], title, deadline };
+
+  return response.status(201).json(user.todos[todoIndex]);
 });
 
 app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
