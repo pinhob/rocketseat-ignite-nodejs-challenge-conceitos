@@ -22,7 +22,7 @@ describe('Users', () => {
     });
   });
 
-  it.skip('should not be able to create a new user when username already exists', async () => {
+  it('should not be able to create a new user when username already exists', async () => {
     await request(app)
       .post('/users')
       .send({
