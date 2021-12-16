@@ -109,7 +109,22 @@ app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
 });
 
 app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { user } = request;
+  const { id } = request.params;
+
+  const todo = user.todos.find((todo) => todo.id === id);
+
+  if(!todo) {
+    return response.status(404).json({ error: 'Mensagem do erro' });
+  }
+
+  console.log(todo);
+
+  user.todos.splice(todo, 1);
+
+  console.log(user.todos);
+
+  return response.status(204).send();
 });
 
 module.exports = app;
