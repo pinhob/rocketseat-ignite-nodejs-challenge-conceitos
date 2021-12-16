@@ -130,7 +130,7 @@ describe('Todos', () => {
     expect(response.body.error).toBeTruthy();
   });
 
-  it.skip('should be able to mark a todo as done', async () => {
+  it('should be able to mark a todo as done', async () => {
     const userResponse = await request(app)
       .post('/users')
       .send({
@@ -158,7 +158,7 @@ describe('Todos', () => {
     });
   });
 
-  it.skip('should not be able to mark a non existing todo as done', async () => {
+  it('should not be able to mark a non existing todo as done', async () => {
     const userResponse = await request(app)
       .post('/users')
       .send({
